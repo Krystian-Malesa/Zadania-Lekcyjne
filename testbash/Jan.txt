@@ -1,0 +1,20 @@
+Witaj świecie
+Witaj, Jan
+Różne
+Number: 1
+Number: 2
+Number: 3
+Number: 4
+Number: 5
+Licz: 1
+Witaj, Jan
+Witaj świecie
+Witaj, Jan
+Różne
+Number: 1
+Number: 2
+Number: 3
+Number: 4
+Number: 5
+Licz: 1
+Witaj, Jan
