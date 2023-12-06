@@ -1,0 +1,2 @@
+Najwieksza liczba to: 6423, a najmiejsza liczba to: 1, suma to = 6691, srednia to = 477.93
+mediana z liczb to 23
