@@ -1,0 +1,13 @@
+{
+    "nazwa": "Czekoladowe",
+    "skladniki": {
+        "Czekolada": {
+            "ilosc": "1",
+            "jednostka": "sztuk"
+        },
+        "Mleko w proszku": {
+            "ilosc": "1",
+            "jednostka": "sztuk"
+        }
+    }
+}
