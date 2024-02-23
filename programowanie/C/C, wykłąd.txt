@@ -1,0 +1,64 @@
+#include <limits.h>
+
+int main()
+{
+    char x;
+    x = 0;
+    
+    x = x | (4+32);
+    
+    x = x & 251;
+    
+    x = ~x;
+    
+    printf("%d\n",x);
+
+}
+
+wynik = -33 
+
+
+
+int main()
+{
+    char x;
+    x = 0;
+    
+    printf("%d\n",x);
+    x = x | 1;
+
+    x = x << 7;
+
+    x = x >> 1;
+
+    print("%d\n"x);
+
+}
+
+
+Wypisz danego x który jest charem zeby wypisalo 
+00001100
+4+8 = 12
+
+char x = 12;
+
+
+#include <stdio.h>
+#include <time.h>
+#include <math.h>
+#include <stdlib.h> 
+#include <limits.h>
+
+int main()
+{
+    // char x = 8;
+    int i;
+    // x = 0;
+    
+    // x = x | (4+8);
+    
+    for (int i = 0; i<=8; ++i)
+    
+    printf("%d\n",pow(i,2));
+
+}
