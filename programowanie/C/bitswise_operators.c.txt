@@ -1,0 +1,35 @@
+/* For more informatins please read:
+
+https://en.wikipedia.org/wiki/Bitwise_operations_in_C
+*/
+
+#include <stdio.h>
+#include <limits.h>
+
+#define TYPE int
+
+int main()
+{
+  TYPE x, v, mask;
+  int bits = sizeof(TYPE) * CHAR_BIT;
+  int b, g;
+  
+  g = 1;
+  
+  x = -77;
+  
+  
+  for (b = bits-1; b >= 0; b--) {
+    mask = 1 << b;
+    v = x & mask;
+    printf("%d", v != 0 ? 1 : 0);
+      
+    if (g%8 == 0){
+      printf(" ");
+    }
+      
+    g += 1;
+  }
+  
+  printf("\n");
+}
