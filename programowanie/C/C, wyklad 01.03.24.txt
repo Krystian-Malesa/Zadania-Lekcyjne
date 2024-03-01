@@ -1,0 +1,446 @@
+				FUNKCJE W C
+- Jezeli funkcja ma nic nie zwracać piszemy 'void'
+
+- Niedopuszczalne jest stosowanie dwoch funkcji o takich samych nazwach
+
+- W języku C nie można robić funkcji zagnieżdżonych
+
+
+***************************************************************
+#include <stdio.h>
+
+int doMath(int x, int y){
+    int result;
+    
+    result = x + y;
+    
+    
+    return result;
+}
+
+int main() {
+    int r = doMath(5,7);
+    
+    printf("123456789\n");
+    printf(">%d<\n",r);
+    printf(">%5d<\n",r); // wyświetlenie na środku
+    printf(">%-5d<\n",r); // dopisanie do lewej strony
+    printf(">%05d<\n",r); // dopelnianie zerami
+    printf(">%5.2f<\n",(float)r); // ile cyfr ma wyswietlic po czesci ulamkowej float
+    
+    return 0;
+}
+
+*****************************************************************
+Tablice w funckji
+
+#include <stdio.h>
+
+#define TAB_SIZE 6
+
+int doMath(int x[], int size){
+    int s;
+    for (s = 0; s<size; s++){
+        printf("%d\n", x[s]);
+    }
+}
+
+
+int main() {
+    int t[TAB_SIZE] = {1,2,3,4,5,6};
+    
+    doMath(t, TAB_SIZE);
+    
+    return 0;
+}
+
+
+*****************************************************************
+
+funckja ktora przyjmuje jako agrument dwa wektory (czyli dwie tablice jednowymiarowe) i zeby funkcja zwracała mi sume tych dwoch wetkorów
+w skrócie funckja która zwraca dwa zsumowane wektory.
+
+					MOJ SPOSOB
+
+*****************************************************************
+#include <stdio.h>
+
+dodajWektory(int wektor1[], int wektor2[], int wynik[], int dlugosc) {
+    for (int i = 0; i < dlugosc; i++) {
+        wynik[i] = wektor1[i] + wektor2[i];
+    }
+}
+
+int main() {
+    int wektor1[] = {1, 3, 4};
+    int wektor2[] = {3, 2, 3};
+    int wynik[3];
+    
+    dodajWektory(wektor1, wektor2, wynik, 3);
+    
+    printf("Wynik dodawania wektorów:\n");
+    for (int i = 0; i < 3; i++) {
+        printf("%d ", wynik[i]);
+    }
+    printf("\n");
+
+    return 0;
+    
+}
+*****************************************************************
+
+					JEGO SPOSOB
+
+*****************************************************************
+
+#include <stdio.h>
+
+#define TAB_SIZE 3
+
+void addV(int x[], int y[], int v[], int size) { // czy *x czy x[] <- to jest to samo
+    int s;
+    for (s = 0; s < size; s++) {
+        v[s] = x[s] + y[s];
+    }
+}
+
+
+int main() {
+    int v1[TAB_SIZE] = {1,2,3};
+    int v2[TAB_SIZE] = {1,2,3};
+    int v[TAB_SIZE];
+
+    int i;
+    
+    
+    addV(v1, v2, v, TAB_SIZE);
+    
+    printf("=============\n");
+    
+    for (int i = 0; i<TAB_SIZE; i++){
+        printf("%d\n", v[i]);
+    }
+    
+    return 0;
+}
+
+*****************************************************************
+
+					CIEKAWOSTKA
+
+*****************************************************************
+
+
+#include <stdio.h>
+
+#define _3D 3
+#define _2D 2
+
+void addV(int x[], int y[], int v[], int size) { // czy *x czy x[] <- to jest to samo
+    int s;
+    for (s = 0; s < size; s++) {
+        v[s] = x[s] + y[s];
+    }
+}
+
+
+int main() {
+    int v1_3d[_3D] = {1,2,3};
+    int v2_3d[_3D] = {4,5,6};
+    int v_3d[_3D];
+
+    
+    int v1_2d[_2D] = {1,2};
+    int v2_2d[_2D] = {4,5};
+    int v_2d[_2D];
+    
+    int i;
+    
+    addV(v1_3d, v2_3d, v_3d, _3D);
+    
+    for (i = 0; i<_3D; i++){
+        printf("%d\n", v_3d[i]);
+    }
+    
+    printf("======================\n");
+    
+    addV(v1_2d, v2_2d, v_2d, _2D);
+    
+    for (i = 0; i<_2D; i++){
+        printf("%d\n", v_2d[i]);
+    }
+    
+    printf("======================\n");
+    
+    addV(v1_3d, v2_2d, v_3d, _3D);
+    
+    for (i = 0; i<_3D; i++){
+        printf("%d\n", v_3d[i]);
+    }
+    
+    return 0;
+}
+
+*****************************************************************
+
+			Wyciaganie danego indeksu z tablicy
+
+*****************************************************************
+
+int main() {
+    int a[3] = {1,2,3};
+    int x = 100;
+    int b[3] = {4,5,6};
+    int y = 200
+    int c[3] = {7,8,9};
+    
+    /* program ułożył to sobie tak
+    int x = 100;
+    int y = 200
+    int a[3] = {1,2,3};
+    int b[3] = {4,5,6};
+    int c[3] = {7,8,9};
+    */
+    
+    
+    printf("%d\n", b[-4]);
+    
+    return 0;
+    
+}
+
+*****************************************************************
+
+- Nazwa tablicy jest wskaznikiem pierwszego elementu tablicy
+
+- Jezeli przekazujemy tablice to tak naprawde przekazujemy wskaznic na pierwszy element tej tablicy.(zagrożenie działania na orginale)
+
+short int t[3] = {1,2,3}
+
+[][][][1] [][][][2] [][][][3]  przesuwa sie co 4 bity a nie co jeden!
+
+    ^             ^	   ^
+    |		  |        | 
+   t		 t+1      t+2
+
+
+#include <stdio.h>
+
+void cosInnego(int x){
+    x = 6;
+}
+
+
+int main(){
+    int y = {7};
+    
+    cosInnego(y);
+    
+    printf("%d", y);
+    
+    return 0;
+}
+
+wynik to 7		
+
+NAPISAĆ OBOK TEGO NA GÓRZE ^ #include <stdio.h>
+
+void cosInnego(int x[]){
+    x[0] = 6;
+}
+
+
+int main(){
+    int y[] = {7};
+    
+    cosInnego(y);
+    
+    printf("%d", y[0]);
+    
+    return 0;
+}
+
+Wynik to 6
+
+*****************************************************************
+
+			    Struktura
+
+*****************************************************************
+
+#include <stdio.h>
+
+struct vector3D {
+    int components[3];
+    int size;
+};                              // <-- Pamietać o średniku!
+
+
+struct vector3D initV3D(struct vector3D v){
+    v.size = 3;
+    for (int i=0; i<v.size; i++){
+        v.components[i] = 1;
+    }
+    return v;
+}
+
+int main() {
+    struct vector3D v1, v2;
+    
+    printf("%d\n", v1.size);
+    
+    v1 = initV3D(v1);
+    v2 = initV3D(v2);
+    
+    printf("%d\n", v1.size);
+    
+    for (int i=0; i<v1.size; i++) {
+        printf("%d ", v1.components[i]);
+        
+    }
+
+    return 0;
+}
+
+
+*****************************************************************
+
+    Struktura (zadanie dodawanie wektorów za pomocą struktur) po to są te struktury zeby okreslić rozmiar wektorow, chyba?
+
+*****************************************************************
+
+#include <stdio.h>
+
+#define TAB_SIZE 3
+
+
+struct vector3D {
+    int components[3];
+    int size;
+};  
+
+
+struct vector3D initV3D(struct vector3D v){
+    v.size = 3;
+    for (int i=0; i<v.size; i++){
+        v.components[i] = 1;
+    }
+    
+    return v;
+}
+
+struct vector3D addV(struct vector3D x, struct vector3D y) { // czy *x czy x[] <- to jest to samo
+    struct vector3D z;
+    z.size = x.size;
+    
+    for (int s = 0; s < z.size; s++) {
+        z.components[s] = x.components[s] + y.components[s];
+    }
+    
+    return z;
+}
+
+void printV3D(struct vector3D v){
+    for (int i=0; i<v.size; i++){
+        printf("%d ", v.components[i]);
+    }
+    printf("\n");
+}
+
+
+
+int main() {
+    struct vector3D v1, v2={{4,5,6},3}, v;
+    
+    v1.size = 3;
+    v1.components[0] = 1;
+    v1.components[1] = 2;
+    v1.components[2] = 3;
+    
+    printV3D(v1);
+    printV3D(v2);
+    
+    v = addV(v1,v2);
+
+    printV3D(v);
+    
+    return 0;
+}
+
+
+
+*****************************************************************
+
+    			TYP WYLICZENIOWY
+
+*****************************************************************
+
+#include <stdio.h>
+
+
+enum boolean {TRUE,FALSE};
+enum dniTygodnia {PN, WT, SR,CZ, PT, SOB, NDZ};
+
+int main() {
+    enum boolean x;
+    
+    
+    enum dniTygodnia dzien;
+    
+    dzien = PT;
+    
+    switch(dzien){
+        case PN:
+        printf("Poniedzialek");
+        break;
+        case WT:
+        printf("Wtorek");
+        break;
+        case SR:
+        printf("Sroda");
+        break;
+        case CZ:
+        printf("Czwartek");
+        break;
+        case PT:
+        printf("Piatek");
+        break;
+        case SOB:
+        printf("Sobota");
+        break;
+        case NDZ:
+        printf("Niedziela");
+        break;
+        
+    }
+
+    
+    return 0;
+}
+
+*****************************************************************
+
+zadanie 
+tablica 2,3 i program pyta uzytkownia jakie liczby maja byc w tej tablicy.
+
+
+#include <stdio.h>
+#include <stdbool.h>
+
+int t[2][3];
+int main()
+{
+    for (int i=0; i<2;i++){
+        for (int j=0; j<3; j++){
+            scanf("%d ",&t[i][j]);
+        }
+    }
+    
+    for (int i=0; i<2;i++){
+        printf("\n");
+        for (int j=0; j<3; j++)
+        printf("%d ",t[i][j]);
+    }
+    
+    return 0;
+}
