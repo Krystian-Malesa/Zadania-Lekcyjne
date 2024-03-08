@@ -1,0 +1,185 @@
+1. Struktura z 2 składowymi 
+
+#include <stdio.h>
+struct skladowe {
+  int x;
+  int y;
+};
+
+int main () {
+  int a;
+  struct skladowe s1;
+  a = 8;
+
+  s1.x = 5;
+  s1.y = 7;
+
+  printf("%d %d\n", s1.x, s1.y);
+  return 0;
+}
+
+
+2. Tablica zawierająca 10 takich struktur
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+
+struct skladowe {
+  int x;
+  int y;
+};
+
+
+void wypisz(struct skladowe s){
+  printf("%d %d\n", s.x, s.y);
+}
+
+void init(struct skladowe tab[], int index){
+  tab[index].x = 123;
+  tab[index].y = 456;
+
+}
+
+
+int main () {
+  struct skladowe tab[10];
+
+  init(tab, 5);
+  wypisz(tab[2]);
+  wypisz(tab[5]);
+
+  return 0;
+}
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#define TAB_SIZE 10
+
+
+struct skladowe {
+  int x;
+  int y;
+};
+
+
+void wypisz(struct skladowe s){
+  printf("%d %d\n", s.x, s.y);
+}
+
+void init(struct skladowe tab[], int index){
+  tab[index].x = rand()%101;
+  tab[index].y = rand()%101;
+
+}
+
+
+int main () {
+  struct skladowe tab[10];
+  for (int i=0; i<TAB_SIZE; i++){
+      init(tab,i);
+     }
+
+     for(int i=0; i<10; i++){
+        wypisz(tab[i]);
+     }
+}
+
+
+
+
+*****************************************************************
+
+	Program z strukutrami oraz z inputem dla uzytkownika
+
+*****************************************************************
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <string.h>
+#define TAB_SIZE 10
+#define MENU_SIZE 2
+
+enum optionCode {CONTINUE, QUIT, PRINT_ALL, SET_SELECTED, SET_FREE, RESET, PRINT_STAT, QUIT};
+
+struct skladowe {
+  int x;
+  int y;
+};
+
+struct option {
+  enum optionCode code;
+  char letter[2];
+  char text[32];
+};
+
+struct option options[MENU_SIZE] = {
+  {PRINT_ALL, "a", "Wypisz wszystkie"},
+  {SET_SELECTED, "s", "Ustaw wybrany"}
+
+void wypisz(struct skladowe s){
+  printf("%d %d\n", s.x, s.y);
+}
+
+void init(struct skladowe tab[], int index){
+  tab[index].x = 0;
+  tab[index].y = 0;
+}
+
+enum option menu(){
+  char buffer[5];
+  int i;
+
+  for (i=0; i<MENU_SIZE; i++){
+     printf("[%s] %s\n", options[i].letter, options[i].text);
+  }
+  /*
+  printf("[a] Wypisz wszystkie\n");
+  printf("[s] Ustaw wybrany\n");
+  printf("[q] Wyjscie\n");
+  printf("Podaj opcję: ");
+  */
+
+ // scanf("%s", buffer);
+  fgets(buffer, 4, stdin);
+  buffer[strlen(buffer)-1] = '\0';
+
+  printf("Dokonany wybór: %s\n", buffer);
+
+  if(strcmp(buffer, "a") == 0) {
+    printf("Opcja [a]\n");
+  } else if (strcmp(buffer, "s") == 0) {
+    printf("Opcja [s]\n");
+  } else if (strcmp(buffer, "q") == 0) {
+    return QUIT;
+  }
+
+  return CONTINUE;
+}
+
+int main (){
+  struct skladowe tab[10];
+  int i;
+  enum option choice = CONTINUE;
+
+
+  for(i=0; i<TAB_SIZE; i++){
+     init(tab, i);
+  }
+
+
+  while(choice == CONTINUE){
+    choice = menu();
+  }
+
+   return 0;
+}
+
+
+
+
+
+
+
