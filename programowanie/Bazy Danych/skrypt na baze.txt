@@ -45,6 +45,16 @@ CREATE TABLE Notyfikacja(
     FOREIGN KEY (IdUzytkownika) REFERENCES Uzytkownicy(IdUzytkownika)
 );
 
+CREATE TABLE Zamowienie(
+    IdZamowienia INT PRIMARY KEY NOT NULL,
+    IdEgzempalrz INT NOT NULL,
+    IdUzytkownika INT NOT NULL,
+    Wypozyczenie VARCHAR(50),
+    CzasOdbioru VARCHAR(20),
+    Data DATE,
+    FOREIGN KEY (IdUzytkownika) REFERENCES Uzytkownicy(IdUzytkownika)
+);
+
 CREATE TABLE Przedluzenie(
     IdPrzedluzenia INT PRIMARY KEY NOT NULL,
     IdWypozyzenia INT,
@@ -75,6 +85,14 @@ CREATE TABLE Egzemplarz(
     FOREIGN KEY (IdEgzemplarz) REFERENCES Wypozyczenie(IdEgzemplarz) 
 );
 
+CREATE TABLE GodzinyOtwarcia(
+    IdGodzinyOtwarcia INT PRIMARY KEY NOT NULL,
+    IdBiblioteka INT NOT NULL,
+    DzienTygodnai VARCHAR(30),
+    Godziny TIME,
+    STATUS VARCHAR(50)
+    FOREIGN KEY (IdBiblioteka) REFERENCES Biblioteka(IdBiblioteka)
+);
 
 CREATE TABLE Lokalizacja(
     IdLokalizacja INT PRIMARY KEY NOT NULL,
@@ -85,27 +103,25 @@ CREATE TABLE Lokalizacja(
 );
 
 
-
-
 CREATE TABLE Biblioteka(
     IdBiblioteka INT PRIMARY KEY NOT NULL,
-    Lokalizacja VARCHAR(220),
-    IdGodzinyOtwarcia TIME,
+    IdLokalizacja INT,
+    IdGodzinyOtwarcia INT,
     FOREIGN KEY (IdLokalizacja) REFERENCES Lokalizacja(IdLokalizacja),
     FOREIGN KEY (IdGodzinyOtwarcia) REFERENCES GodzinyOtwarcia(IdGodzinyOtwarcia),
-    FOREIGN KEY (IdBiblioteka) REFERENCES GodzinyOtwarcia(IdBiblioteka)
 );
+
 
 
 CREATE TABLE Ksiazka (
     IdKsiazka INT PRIMARY KEY NOT NULL,
-    IdAutor INT,
-    Gatunek VARCHAR(50),
+    IdAutor INT NOT NULL,
+    IdGatunku INT NOT NULL,
     Opis TEXT,
     IdRecenzja INT,
     RokWydania INT,
     IdWydawnictwo INT,
-    Status VARCHAR(20),
+    status VARCHAR(20),
     IdMagazyn INT,
     FOREIGN KEY (IdAutor) REFERENCES Autor(IdAutor),
     FOREIGN KEY (IdRecenzja) REFERENCES Recenzja(IdRecenzja),
