@@ -1,0 +1,116 @@
+*****************************************************************
+
+				Pointer
+
+*****************************************************************
+
+#include <stdio.h>
+
+int main(void){
+    int x=2;
+    int y=5;
+    
+    int *pointer;
+    
+    pointer = &x;
+    
+    printf("%d %d %d\n", x,y, *pointer);
+    
+    pointer = &y;
+    
+    printf("%d %d %d\n", x,y, *pointer);
+    
+    *pointer = 123;
+    
+    printf("%d %d %d\n", x,y, *pointer);
+    
+    return 0;
+
+}
+
+
+*****************************************************************
+
+			Uczycie Pointera
+
+*****************************************************************
+
+#include <stdio.h>
+
+void swap(int v, int w){
+    int tmp;
+    
+    tmp = v;
+    v = w;
+    w = tmp;
+    
+};
+
+void swapNew(int *v, int *w){
+    int tmp;
+    
+    tmp = *v;
+    *v = *w;
+    *w = tmp;
+    
+};
+
+
+int main(void){
+    int x=2;
+    int y=5;
+    
+    int *pointer;
+    
+    pointer = &x;
+    
+    printf("%d %d %d\n", x,y, *pointer);
+    
+    pointer = &y;
+    
+    printf("%d %d %d\n", x,y, *pointer);
+    
+    *pointer = 123;
+    
+    printf("%d %d %d\n", x,y, *pointer);
+    
+    swap(x,y);
+    
+    printf("%d %d %d\n", x, y, *pointer);
+    
+    swapNew(&x, &y);
+    
+    printf("%d %d %d\n", x, y, *pointer);
+    
+    return 0;
+
+}
+
+
+*****************************************************************
+
+			Uczycie argc
+
+*****************************************************************
+
+** argv jest to tablica napisów
+
+char *[*argv] <- napis
+char **argv <- to jest tablica tablic
+
+
+Zrobic program który ma sturkutre studenci z imieniem, nazwiskiem i ocenami. Wszystkie te zmienne mają być
+dynamiczne (czy nie że char[16]) z użyciem gwiazdek i pointerów. Następnie zrobić dodawanie i odejmowanie tych
+studentów
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct student {
+    char imie[16];
+    char nazwisko[16];
+    int oceny[5];
+};
+
