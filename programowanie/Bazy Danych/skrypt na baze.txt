@@ -52,12 +52,13 @@ CREATE TABLE Zamowienie(
     Wypozyczenie VARCHAR(50),
     CzasOdbioru VARCHAR(20),
     Data DATE,
-    FOREIGN KEY (IdUzytkownika) REFERENCES Uzytkownicy(IdUzytkownika)
+    FOREIGN KEY (IdUzytkownika) REFERENCES Uzytkownicy(IdUzytkownika),
+    FOREIGN KEY (IdEgzemplarz) REFERENCES Egzemplarz(IdEgzemplarz)
 );
 
 CREATE TABLE Przedluzenie(
     IdPrzedluzenia INT PRIMARY KEY NOT NULL,
-    IdWypozyzenia INT,
+    IdWypozyzenia INT NOT NULL,
     Typ VARCHAR(50),
     CzasPrzedluzenia VARCHAR(50),
     FOREIGN KEY (IdPrzedluzenia) REFERENCES Przedluzenie(IdPrzedluzenia)
@@ -88,7 +89,7 @@ CREATE TABLE Egzemplarz(
 CREATE TABLE GodzinyOtwarcia(
     IdGodzinyOtwarcia INT PRIMARY KEY NOT NULL,
     IdBiblioteka INT NOT NULL,
-    DzienTygodnai VARCHAR(30),
+    DzienTygodnia VARCHAR(30),
     Godziny TIME,
     STATUS VARCHAR(50)
     FOREIGN KEY (IdBiblioteka) REFERENCES Biblioteka(IdBiblioteka)
