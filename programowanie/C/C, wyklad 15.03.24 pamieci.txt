@@ -114,3 +114,50 @@ struct student {
     int oceny[5];
 };
 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct student {
+    char *imie;
+    char *nazwisko;
+    // int oceny[5];
+};
+
+struct student* stworz(char* im, char* naz){
+    struct student *newStudent = malloc(sizeof(struct student)*1);
+    newStudent->imie = im;
+    newStudent->nazwisko = naz;
+    
+    return newStudent;
+}
+
+void dodaj(struct student **lista, int *pointer, struct student st) {
+    (*lista)[*pointer] = st;
+    (*pointer)++;
+}
+
+void usun(int index){
+    
+}
+
+int main(){
+    
+    struct student *studenci;
+    int ptr = 0;
+    
+    studenci = malloc(sizeof(struct student)*0);
+    dodaj(&studenci, &ptr, *stworz("Krystian", "Malesa"));
+    dodaj(&studenci, &ptr, *stworz("Dawid", "Malesa"));
+    dodaj(&studenci, &ptr, *stworz("Nadia", "Malesa"));
+    
+
+    for (int i=0; i<3; i++){
+        printf("%s\n", studenci[i].imie);
+    }
+    
+    return 0;
+}
+
+
