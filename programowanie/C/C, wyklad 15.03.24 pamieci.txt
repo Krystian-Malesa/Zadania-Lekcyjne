@@ -114,7 +114,6 @@ struct student {
     int oceny[5];
 };
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -148,9 +147,9 @@ int main(){
     int ptr = 0;
     
     studenci = malloc(sizeof(struct student)*0);
-    dodaj(&studenci, &ptr, *stworz("Krystian", "Malesa"));
-    dodaj(&studenci, &ptr, *stworz("Dawid", "Malesa"));
-    dodaj(&studenci, &ptr, *stworz("Nadia", "Malesa"));
+    dodaj(&studenci, &ptr, *stworz("Stefan", "Kowalski"));
+    dodaj(&studenci, &ptr, *stworz("Dawid", "Kowalski"));
+    dodaj(&studenci, &ptr, *stworz("Adam", "Kowalski"));
     
 
     for (int i=0; i<3; i++){
@@ -159,5 +158,6 @@ int main(){
     
     return 0;
 }
+
 
 
