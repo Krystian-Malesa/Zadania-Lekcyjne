@@ -1,0 +1,62 @@
+Na poczatek mamy tablice ktorej nie ma
+wowczas kiedy damy jeden element mamy tablice jednoelementowa
+a kiedy dwa to mamy dwuelementowa, jesli chce dodac kolejny element 
+to tablica zostanie powiekszona dwukrotnie czyli rozmiar 2,4,16 itd.
+
+
+Zadanie 1.
+
+1. Program wywoływany z linii poleceń
+2. Format wywołania: program MIN MAX NUMBER FILE
+3. Wylosować NUMBER liczb z przedziału [MIN, MAX] i zapisać do FILE.
+
+Zadanie 2.
+1. Program wywoływany z linni poleceń.
+2. Format wywołania:
+program FILE ACTION
+ACTION: sum - policzyć sumę liczb z pliku FILE
+	avg - policzyć średnią liczb z pliku FILE
+3. Wynik działania wyprowadzić na standardowe wyjście (ekran).
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+enum optionCode {MIN, MAX}
+
+int main(int argc, char ** argv) {
+  srand(time(NULL);
+  FILE *fileIn, *fileOut;
+  char c;
+  int r;
+
+  if (argc != 3) {
+	printf("Bad number of arguments\n");
+	return 1;
+  }
+
+
+  fileIn = fopen(argv[1], "rt");
+  fileOut = fopen(argv[2], "wt");
+
+  if (fileIn == NULL || fileOut == NULL) {
+   pritnf("File error\n");
+   return 1;
+  }
+  
+  while ( 1 ) {
+   c = fgetc(fileIn);
+   if (feof(fileIn)) {
+	break;
+   }
+   putc(c, stdout);
+   fputc(c, fileOut);
+  }
+
+  fclose(fileIn);
+  fclose(fileOut);
+
+  return 0;
+}
